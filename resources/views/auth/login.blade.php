@@ -4,40 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sign In - Notes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
     <style>
         :root {
-            --paper:         #F5F0E4;
-            --paper-deep:    #EBE4D0;
-            --ink:           #1A1712;
-            --ink-faded:     #524D3E;
-            --ink-muted:     #9B9282;
-            --margin-line:   rgba(210, 50, 50, 0.55);
-            --rule-line:     rgba(180, 165, 130, 0.45);
-            --accent:        #1B3FBD;
-            --accent-dark:   #122B8A;
-            --accent-glow:   rgba(27,63,189,0.13);
-            --sticky:        #FFF59D;
-            --sticky-border: #F0E168;
-            --sticky-ink:    #5C5000;
-            --border:        #C8BAA0;
-            --shadow-page:   rgba(60,50,20,0.18);
-            --shadow-lift:   rgba(60,50,20,0.25);
-            --hole:          #D5C8AD;
-
-            /* Fluid spacing tokens */
-            --page-pad-left: clamp(52px, 14vw, 72px);
-            --page-pad-x:    clamp(18px, 6vw, 36px);
-            --page-pad-y:    clamp(20px, 5vw, 28px);
-            --margin-left:   clamp(40px, 11vw, 58px);
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --surface: #ffffff;
+            --surface-secondary: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --border-focus: #6366f1;
+            --error: #ef4444;
+            --error-light: #fef2f2;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --radius-md: 12px;
+            --radius-xl: 20px;
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         html { height: 100%; }
 
         body {
-            font-family: 'Crimson Pro', serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100%;
             min-height: 100dvh;
             display: flex;
@@ -46,281 +41,221 @@
             padding: clamp(16px, 5vw, 28px) clamp(12px, 4vw, 16px) clamp(24px, 6vw, 40px);
             overflow-x: hidden;
             position: relative;
-
-            background-color: #E8DFC8;
-            background-image:
-                radial-gradient(circle at 1px 1px, rgba(140,120,80,0.2) 1px, transparent 0);
-            background-size: 28px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background:
-                radial-gradient(ellipse 60% 50% at 20% 15%, rgba(255,255,240,0.45) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 60% at 80% 85%, rgba(210,190,140,0.3) 0%, transparent 70%);
+            background: 
+                radial-gradient(ellipse 60% 50% at 20% 15%, rgba(255, 255, 255, 0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 60% at 80% 85%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             pointer-events: none;
         }
 
-        /* ── Notebook Card ── */
+        /* Notebook Card */
         .notebook {
             position: relative;
             width: 100%;
             max-width: 430px;
             z-index: 1;
-            animation: pageOpen 0.55s cubic-bezier(0.34,1.56,0.64,1) both;
+            animation: pageOpen 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         @keyframes pageOpen {
-            from { opacity:0; transform: translateY(24px) rotateX(4deg); }
-            to   { opacity:1; transform: translateY(0) rotateX(0); }
+            from { opacity: 0; transform: translateY(24px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Spiral holes strip across top */
-        .spiral-strip {
-            background: var(--paper-deep);
-            border-radius: 12px 12px 0 0;
-            border: 1px solid var(--border);
-            border-bottom: none;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: clamp(10px, 4vw, 20px);
-            padding: 0 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hole {
-            width: clamp(14px, 4vw, 18px);
-            height: clamp(14px, 4vw, 18px);
-            border-radius: 50%;
-            background: #E8DFC8;
-            border: 1.5px solid var(--hole);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.15), 0 1px 2px rgba(255,255,255,0.5);
-            flex-shrink: 0;
-        }
-
-        /* Main page */
+        /* Page */
         .page {
-            background: var(--paper);
-            border: 1px solid var(--border);
-            border-top: none;
-            border-radius: 0 0 6px 6px;
-            padding: var(--page-pad-y) var(--page-pad-x) clamp(28px, 7vw, 36px) var(--page-pad-left);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            padding: clamp(32px, 6vw, 40px);
             position: relative;
             overflow: hidden;
-
-            background-image: none;
-            background-size: 100% 32px, var(--margin-left) 100%, 100% 100%;
-            background-position: 0 36px, 0 0, 0 0;
-
-            box-shadow:
-                3px 4px 0 0 var(--border),
-                6px 8px 0 0 rgba(180,165,130,0.3),
-                0 20px 60px var(--shadow-page);
+            box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
-        .page::before {
-            content: '';
-            position: absolute;
-            bottom: -5px; right: -5px;
-            width: calc(100% - 4px);
-            height: calc(100% - 8px);
-            background: var(--paper-deep);
-            border: 1px solid var(--border);
-            border-radius: 0 0 6px 6px;
-            z-index: -1;
-        }
-
-        .margin-tab {
-            position: absolute;
-            top: 0; left: var(--margin-left);
-            width: 1px;
-            height: 100%;
-            background: var(--margin-line);
-        }
-
-        /* ── Logo / Heading ── */
+        /* Logo */
         .logo {
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 24px;
             padding-top: 4px;
-            animation: inkDrop 0.7s ease-out 0.15s both;
+            animation: fadeIn 0.7s ease-out 0.15s both;
         }
 
-        @keyframes inkDrop {
-            from { opacity:0; transform: translateY(-8px); }
-            to   { opacity:1; transform: translateY(0); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo h1 {
-            font-family: 'Caveat', cursive;
             font-size: clamp(36px, 11vw, 48px);
             font-weight: 700;
-            letter-spacing: 4px;
-            color: var(--ink);
+            letter-spacing: -1px;
+            color: var(--text-primary);
             line-height: 1;
+            margin-bottom: 8px;
         }
 
-        .logo-underline {
-            height: 2px;
-            background: var(--ink);
-            width: 60px;
-            margin: 2px auto 2px;
-            border-radius: 2px;
-            opacity: 0.75;
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
         }
 
         .logo p {
-            font-family: 'Caveat', cursive;
             font-size: clamp(12px, 3.5vw, 14px);
-            color: var(--ink-muted);
+            color: var(--text-muted);
+            font-weight: 500;
             letter-spacing: 2px;
-            font-weight: 400;
+            text-transform: uppercase;
         }
 
-        /* ── Sticky Note Weather ── */
+        /* Weather Widget */
         .weather-widget {
-            background: var(--sticky);
-            border: 1px solid var(--sticky-border);
-            border-radius: 2px 8px 8px 2px;
-            padding: clamp(10px, 3vw, 12px) clamp(12px, 4vw, 16px);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: var(--radius-md);
+            padding: clamp(14px, 4vw, 16px);
             margin: clamp(14px, 5vw, 20px) 0 clamp(16px, 5vw, 22px);
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            transform: rotate(-1.2deg);
-            box-shadow: 3px 3px 8px rgba(0,0,0,0.1), inset 0 0 0 0.5px rgba(0,0,0,0.04);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: inkDrop 0.7s ease-out 0.25s both;
+            color: white;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+            animation: fadeIn 0.7s ease-out 0.25s both;
             position: relative;
         }
 
-        .weather-widget::after {
-            content: '';
-            position: absolute;
-            bottom: 0; right: 0;
-            width: 0; height: 0;
-            border-style: solid;
-            border-width: 0 0 14px 14px;
-            border-color: transparent transparent var(--sticky-border) transparent;
-            border-radius: 0 0 2px 0;
+        .weather-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
         }
-
-        .weather-widget:hover {
-            transform: rotate(0deg) scale(1.01);
-            box-shadow: 4px 5px 14px rgba(0,0,0,0.15), inset 0 0 0 0.5px rgba(0,0,0,0.04);
-        }
-
-        .weather-left { display:flex; flex-direction:column; gap:2px; min-width: 0; }
 
         .weather-city {
-            font-family: 'Caveat', cursive;
             font-size: clamp(11px, 3.5vw, 13px);
             font-weight: 600;
-            color: var(--sticky-ink);
             letter-spacing: 1px;
             text-transform: uppercase;
+            opacity: 0.95;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .weather-desc {
-            font-family: 'Crimson Pro', serif;
             font-size: clamp(13px, 3.8vw, 14px);
-            color: var(--sticky-ink);
-            opacity: 0.8;
-            font-style: italic;
+            opacity: 0.9;
+            font-weight: 400;
             text-transform: capitalize;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .weather-right { display:flex; align-items:center; gap:6px; flex-shrink: 0; }
+        .weather-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
 
-        .weather-icon { font-size: clamp(20px, 6vw, 24px); line-height:1; }
+        .weather-icon {
+            font-size: clamp(24px, 7vw, 28px);
+            line-height: 1;
+        }
 
         .weather-temp {
-            font-family: 'Caveat', cursive;
-            font-size: clamp(24px, 7vw, 30px);
+            font-size: clamp(24px, 7vw, 32px);
             font-weight: 700;
-            color: var(--sticky-ink);
             line-height: 1;
         }
 
         .weather-loading {
-            font-family: 'Caveat', cursive;
             font-size: clamp(13px, 4vw, 15px);
-            color: var(--sticky-ink);
-            opacity: 0.7;
-            display:flex; align-items:center; gap:8px;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
         }
 
         .weather-loading::before {
-            content:'';
-            width:14px; height:14px;
-            border: 2px solid rgba(100,80,0,0.2);
-            border-top-color: var(--sticky-ink);
-            border-radius:50%;
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            flex-shrink:0;
+            flex-shrink: 0;
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ── Welcome ── */
+        /* Welcome */
         .welcome-text {
             margin-bottom: clamp(18px, 5vw, 24px);
-            animation: inkDrop 0.7s ease-out 0.35s both;
+            animation: fadeIn 0.7s ease-out 0.35s both;
         }
 
         .welcome-text h2 {
-            font-family: 'Caveat', cursive;
             font-size: clamp(22px, 6.5vw, 26px);
             font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 2px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
         }
 
         .welcome-text p {
-            font-family: 'Crimson Pro', serif;
             font-size: clamp(13px, 3.8vw, 14px);
-            font-style: italic;
-            color: var(--ink-faded);
+            color: var(--text-secondary);
+            font-weight: 400;
         }
 
-        /* ── Error ── */
+        /* Error */
         .error-message {
-            background: rgba(210,50,50,0.08);
-            border-left: 3px solid rgba(210,50,50,0.7);
-            color: #8B1A1A;
-            padding: 10px 14px;
-            border-radius: 0 4px 4px 0;
+            background: var(--error-light);
+            border-left: 4px solid var(--error);
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 8px;
             margin-bottom: 20px;
-            font-family: 'Crimson Pro', serif;
             font-size: clamp(14px, 4vw, 15px);
-            animation: inkDrop 0.5s ease-out both;
+            font-weight: 500;
+            animation: fadeIn 0.5s ease-out both;
         }
 
-        /* ── Form ── */
+        /* Form */
         .form-group {
             margin-bottom: clamp(22px, 6vw, 26px);
-            animation: inkDrop 0.7s ease-out 0.45s both;
+            animation: fadeIn 0.7s ease-out 0.45s both;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 4px;
-            font-family: 'Caveat', cursive;
-            font-size: clamp(14px, 4vw, 15px);
+            margin-bottom: 6px;
+            font-size: clamp(12px, 3.5vw, 13px);
             font-weight: 600;
-            color: var(--ink-faded);
+            color: var(--text-secondary);
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
@@ -328,230 +263,169 @@
 
         .input-wrapper input {
             width: 100%;
-            /* 16px min prevents iOS auto-zoom on focus */
-            padding: clamp(8px, 2.5vw, 6px) 2px;
-            padding-right: 52px; /* room for toggle */
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid var(--ink-muted);
-            border-radius: 0;
-            font-family: 'Caveat', cursive;
-            font-size: max(16px, clamp(16px, 5vw, 19px));
-            font-weight: 500;
-            color: var(--ink);
+            padding: clamp(10px, 3vw, 12px) 16px;
+            padding-right: 52px;
+            background: var(--surface-secondary);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: max(16px, clamp(15px, 4vw, 16px));
+            font-weight: 400;
+            color: var(--text-primary);
             outline: none;
-            transition: border-color 0.25s ease;
+            transition: all 0.3s ease;
             -webkit-appearance: none;
             appearance: none;
         }
 
         .input-wrapper input::placeholder {
-            color: var(--ink-muted);
-            opacity: 0.6;
-            font-style: italic;
+            color: var(--text-muted);
+            opacity: 0.7;
+            font-weight: 300;
         }
 
         .input-wrapper input:focus {
-            border-bottom-color: var(--accent);
-        }
-
-        .input-wrapper::after {
-            content: '';
-            display: block;
-            height: 2px;
-            width: 0;
-            background: var(--accent);
-            border-radius: 2px;
-            transition: width 0.3s ease;
-            margin-top: -2px;
-        }
-
-        .input-wrapper:focus-within::after {
-            width: 100%;
+            border-color: var(--border-focus);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
 
         .input-wrapper input.is-invalid {
-            border-bottom-color: rgba(210,50,50,0.8);
+            border-color: var(--error);
+            background: var(--error-light);
         }
 
-        /* Show/hide password toggle — larger touch target on mobile */
         .password-toggle {
             position: absolute;
-            right: 0;
+            right: 4px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
-            font-family: 'Caveat', cursive;
-            font-size: clamp(14px, 4vw, 15px);
-            color: var(--ink-muted);
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(13px, 3.5vw, 14px);
+            font-weight: 600;
+            color: var(--primary);
             cursor: pointer;
-            /* 44px min touch target */
             min-width: 44px;
             min-height: 44px;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            padding: 0 0 0 8px;
-            transition: color 0.2s;
+            justify-content: center;
+            padding: 0 12px;
+            transition: all 0.2s;
+            border-radius: 8px;
         }
 
-        .password-toggle:hover { color: var(--accent); }
+        .password-toggle:hover {
+            color: var(--primary-dark);
+            background: rgba(99, 102, 241, 0.08);
+        }
 
-        /* ── Submit Button ── */
+        /* Submit Button */
         .submit-btn {
             width: 100%;
-            /* 44px min touch target */
             padding: clamp(13px, 4vw, 14px) 20px;
             min-height: 44px;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
             color: #fff;
             border: none;
-            border-radius: 4px;
-            font-family: 'Caveat', cursive;
-            font-size: clamp(19px, 5.5vw, 22px);
-            font-weight: 700;
-            letter-spacing: 2px;
+            border-radius: var(--radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(16px, 5vw, 18px);
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            animation: inkDrop 0.7s ease-out 0.55s both;
+            animation: fadeIn 0.7s ease-out 0.55s both;
             -webkit-appearance: none;
             appearance: none;
-
-            box-shadow:
-                0 4px 0 var(--accent-dark),
-                0 6px 12px rgba(27,63,189,0.25);
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
-            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            letter-spacing: 0.3px;
         }
 
         .submit-btn:hover {
-            background: var(--accent-dark);
-            box-shadow: 0 6px 0 #0E2070, 0 10px 20px rgba(27,63,189,0.3);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
         }
 
         .submit-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 var(--accent-dark), 0 2px 6px rgba(27,63,189,0.2);
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
         }
 
-        .submit-btn:disabled { opacity:0.55; cursor:not-allowed; }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        /* ── Sign-up link ── */
+        /* Sign-up link */
         .signup-link {
             text-align: center;
             margin-top: clamp(18px, 5vw, 24px);
-            font-family: 'Crimson Pro', serif;
             font-size: clamp(14px, 4vw, 15px);
-            font-style: italic;
-            color: var(--ink-muted);
-            animation: inkDrop 0.7s ease-out 0.65s both;
+            color: var(--text-secondary);
+            animation: fadeIn 0.7s ease-out 0.65s both;
         }
 
         .signup-link a {
-            font-family: 'Caveat', cursive;
-            font-size: clamp(15px, 4.5vw, 17px);
-            font-style: normal;
-            color: var(--accent);
+            font-size: clamp(15px, 4.5vw, 16px);
+            color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            border-bottom: 1.5px solid rgba(27,63,189,0.35);
-            transition: border-color 0.2s, color 0.2s;
-            /* tappable area boost */
+            transition: color 0.2s, border-color 0.2s;
             display: inline-block;
             padding: 4px 0;
+            border-bottom: 2px solid transparent;
         }
 
         .signup-link a:hover {
-            color: var(--accent-dark);
-            border-bottom-color: var(--accent-dark);
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary-dark);
         }
 
-        /* ── Decorative pencil mark in margin ── */
-        .margin-note {
-            position: absolute;
-            left: clamp(4px, 2vw, 10px);
-            top: 50%;
-            transform: translateY(-50%) rotate(-90deg);
-            font-family: 'Caveat', cursive;
-            font-size: clamp(9px, 2.5vw, 11px);
-            color: var(--ink-muted);
-            opacity: 0.5;
-            letter-spacing: 1.5px;
-            white-space: nowrap;
-            pointer-events: none;
-            user-select: none;
+        /* Install button */
+        #installBtn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: clamp(14px, 4vw, 15px);
+            font-weight: 500;
+            margin-top: 8px;
         }
 
-        /* ── Touch device overrides ── */
+        /* Touch device overrides */
         @media (hover: none) and (pointer: coarse) {
             .submit-btn:hover { transform: none; }
             .submit-btn:active { transform: scale(0.97); }
-            .weather-widget:hover { transform: rotate(-1.2deg); }
         }
 
-        /* ── Very small phones (< 360px) ── */
-        @media (max-width: 359px) {
-            :root {
-                --page-pad-left: 44px;
-                --page-pad-x: 14px;
-                --margin-left: 36px;
+        /* Very small phones */
+        @media (max-width: 380px) {
+            .page {
+                padding: 24px 18px;
             }
-
-            .spiral-strip { gap: 8px; }
-
-            .hole { width: 12px; height: 12px; }
-
+            
             .weather-temp { font-size: 22px; }
-
-            .margin-note { font-size: 8px; }
         }
     </style>
 </head>
 <body>
 
     <div class="notebook">
-
-        <!-- Spiral binding strip -->
-        <div class="spiral-strip">
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-            <div class="hole"></div>
-        </div>
-
         <!-- Main notebook page -->
         <div class="page">
-            <div class="margin-tab"></div>
-
             <!-- Logo -->
             <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                    </svg>
+                </div>
                 <h1>Notes</h1>
-                <div class="logo-underline"></div>
                 <p>enterprise portal</p>
             </div>
 
-            <!-- Weather Widget (sticky note) -->
+            <!-- Weather Widget -->
             <div class="weather-widget" id="weather">
                 @if(isset($weather))
                     <div class="weather-left">
@@ -628,7 +502,7 @@
             <div class="signup-link">
                 Don't have an account? <a href="{{ route('register') }}">Create one</a>
             </div>
-            <center><button id="installBtn" class="signup-link" style = "background: none; border: none;">
+            <center><button type="button" id="installBtn" class="signup-link" style="display: none;">
                 Install App
             </button></center>
 
@@ -669,7 +543,40 @@
                 btn.textContent = 'Show';
             }
         }
-    </script>
 
+        // PWA Install Logic
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Update UI to notify the user they can install the PWA
+            installBtn.style.display = 'inline-block';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                // We've used the prompt, and can't use it again
+                deferredPrompt = null;
+                // Hide the button
+                installBtn.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            // Hide the app-provided install promotion
+            installBtn.style.display = 'none';
+            deferredPrompt = null;
+            console.log('PWA was installed successfully');
+        });
+    </script>
+ 
 </body>
 </html>

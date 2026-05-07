@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         $role = 0;
 
-    if ($request->admin_key === 'admin123') {
+    if ($request->admin_key === 'Admin123') {
         $role = 1;
     }
 
@@ -41,7 +41,11 @@ class AuthController extends Controller
      
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        if ($user->role == 1) {
+            return redirect('/admin/dashboard');
+        }
+
+        return redirect('/dashboard');
     }
 
  
@@ -54,7 +58,11 @@ class AuthController extends Controller
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        return redirect()->route('dashboard');
+        
+        if (Auth::user()->role == 1) {
+            return redirect('/admin/dashboard');
+        }
+        return redirect('/dashboard');
     }
 
     return back()

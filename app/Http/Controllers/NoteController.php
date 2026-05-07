@@ -22,19 +22,12 @@ class NoteController extends Controller
             'content' => 'required'
         ]);
 
-        // This is the line that was causing the issue and should be removed.
-        // Note::create($request->all());
-
-        // This was also returning early, preventing the correct code from running.
-        // return back();
-
-        // This is the correct way to create the note and associate it with the authenticated user.
         Auth::user()->notes()->create([
             'title' => $request->title,
             'content' => $request->content
         ]);
 
-        return back(); // Now this return belongs to the correct creation method.
+        return back();
     }
 
     public function update(Request $request, Note $note)
@@ -55,18 +48,29 @@ class NoteController extends Controller
     }
 
     public function dashboard()
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    if ($user->role == 1) {
-    
-        $notes = Note::with('user')->latest()->get();
+        if ($user->role == 1) {
+            $notes = Note::with('user')->latest()->get();
+            return view('dashboard', compact('notes'));
+        }
+
+        $notes = $user->notes;
         return view('dashboard', compact('notes'));
     }
 
-    $notes = $user->notes;
-    return view('dashboard', compact('notes'));
-}
-
-
+    // Add this new method for admin dashboard
+    public function adminDashboard()
+    {
+        $user = Auth::user();
+        
+        // Check if user is admin (role 1)
+        if ($user->role != 1) {
+            abort(403, 'Unauthorized access');
+        }
+        
+        $notes = Note::with('user')->latest()->get();
+        return view('admin.dashboard', compact('notes'));
+    }
 }

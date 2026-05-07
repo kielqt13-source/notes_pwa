@@ -4,35 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
-            background-color: #f5f7fa;
-            padding: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
         }
 
-        /* ── Header ── */
         .top-header {
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 12px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 16px 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -40,49 +29,51 @@
         }
 
         .header-content {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 16px;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             min-width: 0;
         }
 
         .brand-icon {
-            width: 34px;
-            height: 34px;
+            width: 40px;
+            height: 40px;
             flex-shrink: 0;
-            background: #2563eb;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
         .brand h1 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #111827;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            letter-spacing: -0.3px;
         }
 
         .user-section {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 14px;
             flex-shrink: 0;
         }
 
@@ -91,182 +82,209 @@
         }
 
         .user-info .name {
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
             font-weight: 600;
-            color: #111827;
+            color: #0f172a;
             white-space: nowrap;
         }
 
         .user-info .role {
-            font-size: 0.6875rem;
-            color: #6b7280;
+            font-size: 0.75rem;
+            color: #6366f1;
+            font-weight: 500;
         }
 
         .logout-btn {
             background: #ffffff;
-            border: 1px solid #d1d5db;
-            color: #374151;
-            padding: 7px 12px;
-            border-radius: 8px;
-            font-size: 0.8125rem;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.875rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
             white-space: nowrap;
         }
 
         .logout-btn:hover {
-            background: #f9fafb;
-            border-color: #9ca3af;
-            color: #111827;
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #ef4444;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
         }
 
         .logout-label {
             display: inline;
         }
 
-        /* ── Main Container ── */
         .main-container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 24px 16px;
+            padding: 32px 24px 48px;
         }
 
-        /* ── Page Header ── */
         .page-header {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .admin-badge {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            background: #eff6ff;
-            color: #2563eb;
-            border: 1px solid #bfdbfe;
+            gap: 6px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
             border-radius: 20px;
-            padding: 3px 10px;
-            font-size: 0.75rem;
+            padding: 6px 16px;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a.admin-badge:hover {
+            transform: translateY(-2px);
+            color: white;
         }
 
         .page-header h2 {
-            font-size: 1.5rem;
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
             font-weight: 700;
-            color: #111827;
-            margin: 0 0 6px 0;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
             word-break: break-word;
         }
 
         .page-header p {
-            font-size: 0.875rem;
-            color: #6b7280;
+            font-size: 0.95rem;
+            color: #64748b;
             margin: 0;
-            line-height: 1.5;
+            font-weight: 400;
         }
 
-        /* ── Notes Header ── */
         .notes-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 12px;
         }
 
         .notes-header h3 {
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: #111827;
+            color: #0f172a;
             margin: 0;
         }
 
         .notes-count {
-            font-size: 0.8125rem;
-            color: #6b7280;
-            background: #f3f4f6;
-            padding: 3px 10px;
+            font-size: 0.85rem;
+            color: #6366f1;
+            background: #e0e7ff;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* ── Notes Grid — mobile-first: 1 column ── */
         .notes-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 14px;
+            gap: 20px;
         }
 
-        /* ── Note Card ── */
         .note-card {
             background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 16px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Lift only on pointer devices to avoid sticky hover on touch */
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #6366f1, #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
         @media (hover: hover) and (pointer: fine) {
             .note-card:hover {
-                border-color: #2563eb;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-                transform: translateY(-2px);
+                border-color: #6366f1;
+                box-shadow: 0 12px 40px rgba(99, 102, 241, 0.12);
+                transform: translateY(-4px);
+            }
+
+            .note-card:hover::before {
+                opacity: 1;
             }
         }
 
         .note-title {
-            font-size: 0.9375rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            color: #111827;
-            margin: 0 0 8px 0;
+            color: #0f172a;
+            margin: 0 0 12px 0;
             word-break: break-word;
             line-height: 1.4;
         }
 
         .note-content {
-            font-size: 0.875rem;
-            color: #4b5563;
-            line-height: 1.6;
-            margin-bottom: 14px;
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 20px;
             word-break: break-word;
+            font-weight: 400;
         }
 
         .note-footer {
             display: flex;
             align-items: center;
-            padding-top: 12px;
-            border-top: 1px solid #f3f4f6;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid #f1f5f9;
         }
 
         .author-tag {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            font-size: 0.8125rem;
-            color: #6b7280;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #64748b;
             font-weight: 500;
             min-width: 0;
         }
 
         .author-avatar {
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             flex-shrink: 0;
-            background: #2563eb;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 0.6875rem;
+            font-size: 0.8rem;
             font-weight: 700;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
         }
 
         .author-name {
@@ -275,91 +293,108 @@
             text-overflow: ellipsis;
         }
 
-        /* ── Empty State ── */
+        .btn-delete {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #ef4444;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background: #ef4444;
+            color: white;
+            border-color: #ef4444;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
         .empty-state {
             text-align: center;
-            padding: 48px 20px;
+            padding: 64px 24px;
             background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 2px dashed #e2e8f0;
+            border-radius: 16px;
         }
 
         .empty-state-icon {
-            width: 56px;
-            height: 56px;
-            background: #f3f4f6;
+            width: 72px;
+            height: 72px;
+            background: #f1f5f9;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 14px;
+            margin: 0 auto 20px;
         }
 
         .empty-state-icon i {
-            font-size: 1.75rem;
-            color: #9ca3af;
+            font-size: 2rem;
+            color: #94a3b8;
         }
 
         .empty-state h3 {
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            color: #111827;
-            margin-bottom: 6px;
+            color: #0f172a;
+            margin-bottom: 8px;
         }
 
         .empty-state p {
-            font-size: 0.875rem;
-            color: #6b7280;
+            font-size: 0.9rem;
+            color: #64748b;
             margin: 0;
         }
 
-        /* ── Breakpoints ── */
-
-        /* Tablet: 2 columns */
-        @media (min-width: 600px) {
+        @media (min-width: 640px) {
             .notes-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-            .main-container {
-                padding: 28px 20px;
-            }
-            .page-header h2 {
-                font-size: 1.75rem;
-            }
-        }
-
-        /* Desktop: 3 columns */
-        @media (min-width: 960px) {
-            .notes-grid {
-                grid-template-columns: repeat(3, 1fr);
                 gap: 20px;
             }
-            .header-content {
-                padding: 0 24px;
-            }
             .main-container {
-                padding: 32px 24px;
+                padding: 36px 28px 56px;
             }
             .page-header h2 {
-                font-size: 1.875rem;
-            }
-            .note-card {
-                padding: 20px;
-            }
-            .brand h1 {
-                font-size: 1.25rem;
+                font-size: 2rem;
             }
         }
 
-        /* Very small phones (≤ 380px): icon-only logout, hide user info */
+        @media (min-width: 1024px) {
+            .notes-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+            .header-content {
+                padding: 0 32px;
+            }
+            .main-container {
+                padding: 40px 32px 64px;
+            }
+            .page-header h2 {
+                font-size: 2.25rem;
+            }
+            .note-card {
+                padding: 28px;
+            }
+            .brand h1 {
+                font-size: 1.35rem;
+            }
+        }
+
         @media (max-width: 380px) {
             .logout-label {
                 display: none;
             }
             .logout-btn {
-                padding: 7px 10px;
+                padding: 8px 12px;
             }
             .user-info {
                 display: none;
@@ -369,7 +404,7 @@
 </head>
 <body>
 
-    <!-- Top Header -->
+    @if(auth()->check() && auth()->user()->role == 1)
     <div class="top-header">
         <div class="header-content">
             <div class="brand">
@@ -382,7 +417,7 @@
             <div class="user-section">
                 <div class="user-info">
                     <div class="name">{{ auth()->user()->name }}</div>
-                    <div class="role">Administrator</div>
+                    <div class="role">{{ auth()->user()->role == 1 ? 'Administrator' : 'User' }}</div>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -395,21 +430,17 @@
         </div>
     </div>
 
-    <!-- Main Container -->
     <div class="main-container">
-
-        <!-- Page Header -->
         <div class="page-header">
-            <div class="admin-badge">
-                <i class="bi bi-shield-fill"></i>
-                Administrator
-            </div>
+            <a href="/dashboard" class="admin-badge">
+                <i class="bi bi-person-badge"></i>
+                Go to Personal Notes
+            </a>
             <h2>Hello, {{ auth()->user()->name }}</h2>
             <p>Overview of all notes and their authors across the platform</p>
         </div>
 
-        <!-- Notes Section -->
-        @if(count($notes) > 0)
+        @if(isset($notes) && count($notes) > 0)
             <div class="notes-header">
                 <h3>All Notes</h3>
                 <span class="notes-count">{{ count($notes) }} {{ count($notes) === 1 ? 'note' : 'notes' }}</span>
@@ -423,10 +454,18 @@
                         <div class="note-footer">
                             <span class="author-tag">
                                 <span class="author-avatar">
-                                    {{ strtoupper(substr($note->user->name, 0, 1)) }}
+                                    {{ strtoupper(substr($note->user->name ?? 'U', 0, 1)) }}
                                 </span>
-                                <span class="author-name">{{ $note->user->name }}</span>
+                                <span class="author-name">{{ $note->user->name ?? 'Unknown User' }}</span>
                             </span>
+                            <form method="POST" action="/notes/{{ $note->id }}" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-delete" onclick="return confirm('Delete this note?')">
+                                    <i class="bi bi-trash"></i>
+                                    Delete
+                                </button>
+                            </form>
                         </div>
                     </div>
                 @endforeach
@@ -442,8 +481,21 @@
         @endif
 
     </div>
+    @else
+    <div class="main-container" style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px;">
+        <div class="empty-state" style="width: 100%; max-width: 450px; padding: 48px 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+            <div class="empty-state-icon" style="background: #fef2f2;">
+                <i class="bi bi-shield-lock" style="color: #ef4444;"></i>
+            </div>
+            <h3 style="color: #ef4444;">Access Denied</h3>
+            <p>You must be an administrator to view this page.</p>
+            <a href="/dashboard" class="admin-badge" style="margin-top: 24px;">
+                <i class="bi bi-arrow-left"></i> Return to Dashboard
+            </a>
+        </div>
+    </div>
+    @endif
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

@@ -16,7 +16,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Protected routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [NoteController::class, 'dashboard'])->name('dashboard');
+    Route::get('/admin/dashboard', [NoteController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
     Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
 });
-
