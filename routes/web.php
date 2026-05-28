@@ -18,5 +18,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [NoteController::class, 'dashboard'])->name('dashboard');
     Route::get('/admin/dashboard', [NoteController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
+    Route::put('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
     Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
 });

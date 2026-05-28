@@ -28,7 +28,7 @@
             width: 200%;
             height: 200%;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
             animation: backgroundMove 20s ease-in-out infinite;
@@ -64,7 +64,7 @@
 
         .decorative-top {
             height: 180px;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             position: relative;
             overflow: hidden;
         }
@@ -115,8 +115,8 @@
             margin: -80px auto 20px;
             border: 4px solid #1e293b;
             box-shadow: 
-                0 8px 32px rgba(99, 102, 241, 0.4),
-                0 0 0 4px rgba(99, 102, 241, 0.1);
+                0 8px 32px rgba(16, 185, 129, 0.4),
+                0 0 0 4px rgba(16, 185, 129, 0.1);
             position: relative;
             overflow: hidden;
             animation: avatarFloat 3s ease-in-out infinite;
@@ -191,28 +191,28 @@
         }
 
         .info-card:hover {
-            background: rgba(99, 102, 241, 0.15);
+            background: rgba(16, 185, 129, 0.15);
             transform: translateX(8px) scale(1.02);
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
         }
 
         .icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #10b981, #059669);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .info-card:hover .icon {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
         }
 
         .icon svg {

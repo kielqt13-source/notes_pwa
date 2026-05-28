@@ -6,18 +6,18 @@
     <title>Sign In - Notes</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#10b981">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
+            --primary: #10b981;
+            --primary-dark: #047857;
             --surface: #ffffff;
             --surface-secondary: #f8fafc;
             --text-primary: #0f172a;
             --text-secondary: #475569;
             --text-muted: #94a3b8;
             --border: #e2e8f0;
-            --border-focus: #6366f1;
+            --border-focus: #10b981;
             --error: #ef4444;
             --error-light: #fef2f2;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -104,13 +104,13 @@
         .logo-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 16px;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
         }
 
         .logo-icon svg {
@@ -129,7 +129,7 @@
 
         /* Weather Widget */
         .weather-widget {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #10b981, #059669);
             border-radius: var(--radius-md);
             padding: clamp(14px, 4vw, 16px);
             margin: clamp(14px, 5vw, 20px) 0 clamp(16px, 5vw, 22px);
@@ -138,7 +138,7 @@
             justify-content: space-between;
             gap: 10px;
             color: white;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
             animation: fadeIn 0.7s ease-out 0.25s both;
             position: relative;
         }
@@ -287,7 +287,7 @@
         .input-wrapper input:focus {
             border-color: var(--border-focus);
             background: white;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
         }
 
         .input-wrapper input.is-invalid {
@@ -319,7 +319,7 @@
 
         .password-toggle:hover {
             color: var(--primary-dark);
-            background: rgba(99, 102, 241, 0.08);
+            background: rgba(16, 185, 129, 0.08);
         }
 
         /* Submit Button */
@@ -327,7 +327,7 @@
             width: 100%;
             padding: clamp(13px, 4vw, 14px) 20px;
             min-height: 44px;
-            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
             color: #fff;
             border: none;
             border-radius: var(--radius-md);
@@ -341,18 +341,18 @@
             animation: fadeIn 0.7s ease-out 0.55s both;
             -webkit-appearance: none;
             appearance: none;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
             letter-spacing: 0.3px;
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
         .submit-btn:active {
             transform: translateY(0);
-            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
         }
 
         .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }

@@ -11,8 +11,8 @@
 
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
+            --primary: #10b981;
+            --primary-dark: #047857;
             --surface: #ffffff;
             --surface-secondary: #f8fafc;
             --text-primary: #0f172a;
@@ -65,14 +65,14 @@
         .brand-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #10b981, #059669);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.3rem;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .brand-text h1 {
@@ -149,14 +149,14 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border-radius: 20px;
             padding: 6px 16px;
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
             text-decoration: none;
             transition: all 0.3s ease;
         }
@@ -232,7 +232,7 @@
 
         .form-control:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
             background: white;
         }
 
@@ -246,7 +246,7 @@
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #10b981, #059669);
             border: none;
             color: white;
             padding: 12px 28px;
@@ -255,7 +255,7 @@
             font-size: 1rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -264,7 +264,7 @@
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
         .notes-header {
@@ -286,7 +286,7 @@
         .notes-count {
             font-size: 0.85rem;
             color: var(--primary);
-            background: #e0e7ff;
+            background: #d1fae5;
             padding: 6px 16px;
             border-radius: 20px;
             font-weight: 600;
@@ -476,11 +476,6 @@
     <div class="main-container">
         <div class="page-header">
             @php $user = auth()->user(); @endphp
-            @if($user->role == 1)
-                <a href="/admin/dashboard" class="admin-badge">
-                    <i class="bi bi-shield-check"></i> Go to Admin Dashboard
-                </a>
-            @endif
             <h2>Hello, {{ auth()->user()->name }} 👋</h2>
             @if (auth()->user()->role == 1)
                 <p>As an admin, you can see all notes from all users here.</p>
@@ -489,6 +484,7 @@
             @endif
         </div>
 
+        @if(auth()->user()->role != 1)
         <div class="add-note-card">
             <h3 class="card-title">
                 <i class="bi bi-pencil-square"></i>
@@ -524,6 +520,7 @@
                 </button>
             </form>
         </div>
+        @endif
 
         @if(isset($notes) && count($notes) > 0)
             <div class="notes-header">
@@ -550,6 +547,7 @@
                                 <i class="bi bi-clock"></i>
                                 {{ $note->created_at ? $note->created_at->diffForHumans() : 'Recently' }}
                             </span>
+                            @if(auth()->user()->role != 1)
                             <form method="POST" action="/notes/{{ $note->id }}" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
@@ -562,6 +560,7 @@
                                     Delete
                                 </button>
                             </form>
+                            @endif
                         </div>
                     </div>
                 @endforeach

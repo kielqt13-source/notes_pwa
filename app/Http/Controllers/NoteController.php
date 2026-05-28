@@ -22,7 +22,14 @@ class NoteController extends Controller
             'content' => 'required'
         ]);
 
-        Auth::user()->notes()->create([
+        $user = Auth::user();
+
+        // Prevent admins from creating personal notes
+        if ($user->role == 1) {
+            abort(403, 'Admins cannot create personal notes.');
+        }
+
+        $user->notes()->create([
             'title' => $request->title,
             'content' => $request->content
         ]);
@@ -32,12 +39,31 @@ class NoteController extends Controller
 
     public function update(Request $request, Note $note)
     {
-        $note->update($request->all());
+        $user = Auth::user();
+
+        // Authorize update: only admin or the note owner can update
+        if ($user->role != 1 && $user->id != $note->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $validated = $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $note->update($validated);
         return back();
     }
 
     public function destroy(Note $note)
     {
+        $user = Auth::user();
+
+        // Authorize deletion: only admin or the note owner can delete
+        if ($user->role != 1 && $user->id != $note->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $note->delete();
         return back();
     }
@@ -52,11 +78,11 @@ class NoteController extends Controller
         $user = Auth::user();
 
         if ($user->role == 1) {
-            $notes = Note::with('user')->latest()->get();
-            return view('dashboard', compact('notes'));
+            // Redirect admins to the admin dashboard instead of showing personal notes
+            return redirect()->route('admin.dashboard');
         }
 
-        $notes = $user->notes;
+        $notes = $user->notes()->latest()->get();
         return view('dashboard', compact('notes'));
     }
 

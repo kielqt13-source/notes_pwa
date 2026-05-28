@@ -49,14 +49,14 @@
             width: 40px;
             height: 40px;
             flex-shrink: 0;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.1rem;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .brand h1 {
@@ -90,7 +90,7 @@
 
         .user-info .role {
             font-size: 0.75rem;
-            color: #6366f1;
+            color: #10b981;
             font-weight: 500;
         }
 
@@ -137,14 +137,14 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border-radius: 20px;
             padding: 6px 16px;
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
             text-decoration: none;
             transition: all 0.3s ease;
         }
@@ -188,8 +188,8 @@
 
         .notes-count {
             font-size: 0.85rem;
-            color: #6366f1;
-            background: #e0e7ff;
+            color: #10b981;
+            background: #d1fae5;
             padding: 6px 16px;
             border-radius: 20px;
             font-weight: 600;
@@ -219,15 +219,15 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: linear-gradient(180deg, #6366f1, #8b5cf6);
+            background: linear-gradient(180deg, #10b981, #059669);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         @media (hover: hover) and (pointer: fine) {
             .note-card:hover {
-                border-color: #6366f1;
-                box-shadow: 0 12px 40px rgba(99, 102, 241, 0.12);
+                border-color: #10b981;
+                box-shadow: 0 12px 40px rgba(16, 185, 129, 0.12);
                 transform: translateY(-4px);
             }
 
@@ -276,7 +276,7 @@
             width: 32px;
             height: 32px;
             flex-shrink: 0;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #10b981, #059669);
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
@@ -284,7 +284,7 @@
             color: white;
             font-size: 0.8rem;
             font-weight: 700;
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
         }
 
         .author-name {
@@ -432,10 +432,6 @@
 
     <div class="main-container">
         <div class="page-header">
-            <a href="/dashboard" class="admin-badge">
-                <i class="bi bi-person-badge"></i>
-                Go to Personal Notes
-            </a>
             <h2>Hello, {{ auth()->user()->name }}</h2>
             <p>Overview of all notes and their authors across the platform</p>
         </div>
@@ -458,14 +454,6 @@
                                 </span>
                                 <span class="author-name">{{ $note->user->name ?? 'Unknown User' }}</span>
                             </span>
-                            <form method="POST" action="/notes/{{ $note->id }}" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-delete" onclick="return confirm('Delete this note?')">
-                                    <i class="bi bi-trash"></i>
-                                    Delete
-                                </button>
-                            </form>
                         </div>
                     </div>
                 @endforeach
